@@ -21,6 +21,9 @@ chmod 600 /home/vagrant/.ssh/authorized_keys
 ls -al /home/vagrant/.ssh
 chmod 700 /home/vagrant/.ssh
 ls -al /home/vagrant
+sudo apt update -y
+sudo apt full-upgrade -y
+sudo apt-get autoremove -y
 SCRIPT
 
 Vagrant.configure("2") do |config|
