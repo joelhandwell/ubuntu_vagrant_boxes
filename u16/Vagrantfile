@@ -24,14 +24,16 @@ ls -al /home/vagrant
 sudo apt update -y
 sudo apt full-upgrade -y
 sudo apt-get autoremove -y
+sudo systemctl disable apt-daily.service
+sudo systemctl disable apt-daily.timer
 SCRIPT
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.provider "virtualbox" do |v|
-    v.memory = 1024
-    v.cpus = 2
+    v.memory = 4096
+    v.cpus = 4
   end
   config.ssh.username = "ubuntu"
   config.vm.provision "shell", inline: $script
