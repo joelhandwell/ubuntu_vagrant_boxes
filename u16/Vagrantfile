@@ -1,4 +1,17 @@
-$script = <<SCRIPT
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 4096
+    v.cpus = 4
+    # Basebox ubuntu/xenial64 comes with following Vagrantfile config and causes https://github.com/joelhandwell/ubuntu_vagrant_boxes/issues/1
+    # vb.customize [ "modifyvm", :id, "--uart1", "0x3F8", "4" ]
+    # vb.customize [ "modifyvm", :id, "--uartmode1", "file", File.join(Dir.pwd, "ubuntu-xenial-16.04-cloudimg-console.log") ]
+    # following config will address the issue
+    v.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
+  end
+  config.ssh.username = "ubuntu"
+  config.vm.provision "shell", inline: <<-SCRIPT
 echo "create user vagrant"
 adduser --disabled-password --gecos "" vagrant
 echo 'vagrant:vagrant' | chpasswd
@@ -28,13 +41,4 @@ sudo systemctl disable apt-daily.service
 sudo systemctl disable apt-daily.timer
 SCRIPT
 
-Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/xenial64"
-  config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.provider "virtualbox" do |v|
-    v.memory = 4096
-    v.cpus = 4
-  end
-  config.ssh.username = "ubuntu"
-  config.vm.provision "shell", inline: $script
 end
