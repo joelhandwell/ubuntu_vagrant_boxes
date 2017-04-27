@@ -39,6 +39,8 @@ sudo apt full-upgrade -y
 sudo apt-get autoremove -y
 sudo systemctl disable apt-daily.service
 sudo systemctl disable apt-daily.timer
+sudo ln -sf /opt/VBoxGuestAdditions-5.1.20/lib/VBoxGuestAdditions/mount.vboxsf /sbin/mount.vboxsf
+ls -al /sbin/mount.vboxsf
 SCRIPT
 
 end
