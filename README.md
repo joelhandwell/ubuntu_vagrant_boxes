@@ -5,8 +5,8 @@ Following vagrant boxes are built from most popular based box ```ubuntu/#{code_n
 
 ## Ubuntu 16.04
 [joelhandwell/ubuntu_xenial64_vbguest](https://atlas.hashicorp.com/joelhandwell/boxes/ubuntu_xenial64_vbguest/) v5.2.2
-* upgraded base box version from ```ubuntu/xenial64``` '20171028.0.0' to '20171122.0.0'
-* upgraded virtualbox guest addition to version 5.2.2
+* upgraded base box version from ```ubuntu/xenial64``` '20171122.0.0' to '20171212.0.0'
+* upgraded virtualbox guest addition to version 5.2.4
 * performed apt update && apt full-upgrade && apt-get autoremove
 * created user vagrant with sudo and vagrant default ssh key access
 * disabled apt's periodic update
